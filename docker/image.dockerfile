@@ -57,5 +57,18 @@ RUN apt-get update \
     && echo "export PYTHONPATH=/opt/openrobots/lib/python3.8/site-packages:$PYTHONPATH" >> /etc/bash.bashrc \
     && echo "export CMAKE_PREFIX_PATH=/opt/openrobots:$CMAKE_PREFIX_PATH" >> /etc/bash.bashrc \
     && mkdir -p /aux_ws/src \
-        && git clone https://github.com/tork-a/rqt_joint_trajectory_plot.git /aux_ws/src/rqt_joint_trajectory_plot \
-        && bash -c 'source /opt/ros/noetic/setup.bash && cd /aux_ws && catkin config --install --install-space /opt/ros/noetic/ --extend /opt/ros/noetic/ && catkin build'
+    && git clone https://github.com/tork-a/rqt_joint_trajectory_plot.git /aux_ws/src/rqt_joint_trajectory_plot \
+    && bash -c 'source /opt/ros/noetic/setup.bash && cd /aux_ws && catkin config --install --install-space /opt/ros/noetic/ --extend /opt/ros/noetic/ && catkin build' \
+    && rm -rf /var/lib/apt/lists/* \
+    && echo 'source /opt/ros/noetic/setup.bash' > /etc/bash.bashrc \
+    && echo $'\
+#!/bin/bash\n\
+main(){\n\
+export ROS_MASTER_URI=http://smart_app.local:11311\n\
+export ROS_IP=urrobot.local\n\
+screen -S roscore -d -m roscore \n\
+terminator >/dev/null 2>&1 & \n\
+bash \n\
+}\n\
+main $@' > /entrypoint.bash
+ENTRYPOINT ["bash", "/entrypoint.bash"]
