@@ -55,37 +55,3 @@ RUN mkdir -p /aux_ws/src
 RUN git clone https://github.com/rafaelrojasmiliani/ur_description_minimal.git /aux_ws/src/ur_description_minimal
 RUN git clone https://github.com/tork-a/rqt_joint_trajectory_plot.git /aux_ws/src/rqt_joint_trajectory_plot
 RUN bash -c 'source /opt/ros/noetic/setup.bash && cd /aux_ws && catkin config --install --install-space /opt/ros/noetic/ --extend /opt/ros/noetic/ && catkin build'
-
-
-# user handling
-ARG myuser
-ARG myuid
-ARG mygroup
-ARG mygid
-ARG scriptdir
-RUN addgroup --gid ${mygid} ${mygroup} --force-badname
-RUN adduser --gecos "" --disabled-password  --uid ${myuid} --gid ${mygid} ${myuser} --force-badname
-#add user to sudoers
-RUN echo "${myuser} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-RUN echo "${myuser}:docker" | chpasswd
-
-
-RUN echo "source /opt/ros/noetic/setup.bash" >> /etc/bash.bashrc
-WORKDIR /catkinws
-RUN chmod 777 /catkinws
-
-
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --install-recommends -o Dpkg::Options::="--force-confnew" \
-                    avahi-daemon \
-                    avahi-autoipd \
-                    openssh-server \
-                    isc-dhcp-client \
-                    iproute2
-
-RUN service ssh start
-RUN echo '[server]' >> /etc/avahi/avahi-daemon.conf
-RUN echo 'enable-dbus=no' >> /etc/avahi/avahi-daemon.conf
-RUN echo 'domain-name=local' >> /etc/avahi/avahi-daemon.conf
-RUN echo 'host-name=gsplines-ros' >> /etc/avahi/avahi-daemon.conf
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends -o Dpkg::Options::="--force-confnew" \
-        gfortran libmetis-dev
