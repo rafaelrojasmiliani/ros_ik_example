@@ -38,6 +38,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
                     ros-noetic-moveit-msgs \
                     ros-noetic-rqt-joint-trajectory-controller \
                     ros-noetic-jsk-rviz-plugins \
+                    ros-noetic-kdl-conversions \
+                    python3-tf2-kdl \
+                    python3-tf-conversions \
+                    libtf-conversions-dev \
     && echo "deb [arch=amd64] http://robotpkg.openrobots.org/packages/debian/pub $(lsb_release -cs) robotpkg" | tee /etc/apt/sources.list.d/robotpkg.list \
     && curl http://robotpkg.openrobots.org/packages/debian/robotpkg.key | apt-key add -
 
