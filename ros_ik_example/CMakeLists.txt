@@ -12,7 +12,6 @@ find_package(
              message_generation
              roscpp
              rospy
-             rviz
              sensor_msgs
              std_msgs
              tf2)
