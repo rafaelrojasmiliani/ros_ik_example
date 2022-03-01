@@ -61,7 +61,7 @@ RUN apt-get update \
     && bash -c 'source /opt/ros/noetic/setup.bash && cd /aux_ws && catkin config --install --install-space /opt/ros/noetic/ --extend /opt/ros/noetic/ && catkin build' \
     && rm -rf /var/lib/apt/lists/* \
     && echo 'source /opt/ros/noetic/setup.bash' > /etc/bash.bashrc \
-    && echo $'\
+    && echo '\
 #!/bin/bash\n\
 main(){\n\
 export ROS_MASTER_URI=http://smart_app.local:11311\n\
