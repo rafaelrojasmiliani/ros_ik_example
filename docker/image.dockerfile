@@ -64,8 +64,8 @@ RUN apt-get update \
     && echo '\
 #!/bin/bash\n\
 main(){\n\
-export ROS_MASTER_URI=http://smart_app.local:11311\n\
-export ROS_IP=urrobot.local\n\
+export ROS_MASTER_URI=http://172.0.0.1:11311\n\
+export ROS_IP=172.0.0.1\n\
 screen -S roscore -d -m roscore \n\
 terminator >/dev/null 2>&1 & \n\
 bash \n\
