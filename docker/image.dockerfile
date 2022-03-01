@@ -40,7 +40,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
                     ros-noetic-rqt-joint-trajectory-controller \
                     ros-noetic-jsk-rviz-plugins \
                     ros-noetic-kdl-conversions \
-                    ros-noetic-rviz \
+                    rviz \
                     python3-tf2-kdl \
                     python3-tf-conversions \
                     libtf-conversions-dev \

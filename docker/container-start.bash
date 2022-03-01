@@ -43,7 +43,6 @@ main(){
         ${DOCKER_VIDEO_OPTIONS} \
         ${DOCKER_NETWORK_OPTIONS} \
         --volume $(pwd)/../:/catkinws/src/ \
-        --user $(id -u):$(id -g) \
         rafa606/ros-ik-example bash
 }
 
