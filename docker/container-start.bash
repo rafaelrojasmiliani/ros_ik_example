@@ -41,6 +41,10 @@ main(){
 
     docker pull rafa606/ros-ik-example
 
+    myuid=$(id -u $USER)
+    mygid=$(id -g $USER)
+    mygroup=$(id -g -n $USER)
+    myuser="$USER"
     docker run -it --rm \
         ${DOCKER_VIDEO_OPTIONS} \
         ${DOCKER_NETWORK_OPTIONS} \
