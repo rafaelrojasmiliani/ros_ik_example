@@ -48,7 +48,7 @@ main(){
     docker run -it --rm \
         ${DOCKER_VIDEO_OPTIONS} \
         ${DOCKER_NETWORK_OPTIONS} \
-        --volume $(pwd)/..:/workspace/: \
+        --volume $(pwd)/..:/workspace/src/: \
         --entrypoint="/bin/bash" \
         --workdir=/workspace \
         --privileged \
