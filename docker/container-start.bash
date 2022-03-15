@@ -44,8 +44,11 @@ main(){
     docker run -it --rm \
         ${DOCKER_VIDEO_OPTIONS} \
         ${DOCKER_NETWORK_OPTIONS} \
-        --volume $(pwd)/../:/catkinws/src/ \
-        rafa606/ros-ik-example
+        --volume $(pwd)/..:/workspace/: \
+        --entrypoint="/bin/bash" \
+        --workdir=/workspace \
+        --privileged \
+        "rafa606/ros-ik-example" -c "addgroup --gid ${mygid} ${mygroup} --force-badname;  adduser --gecos \"\" --disabled-password  --uid ${myuid} --gid ${mygid} ${myuser} --force-badname ; usermod -a -G video ${myuser}; echo ${myuser} ALL=\(ALL\) NOPASSWD:ALL >> /etc/sudoers; sudo -EHu ${myuser}  bash"
 }
 
 main $@
