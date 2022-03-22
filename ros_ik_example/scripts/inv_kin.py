@@ -3,10 +3,16 @@ import pdb
 from urdf_parser_py.urdf import URDF
 import PyKDL as kdl
 import numpy as np
+from pykdl_utils.kdl_parser import kdl_tree_from_urdf_model
+
 robot_urdf = URDF.from_parameter_server()
+
 pdb.set_trace()
-kdl_tree = kdl.kdl_tree_from_urdf_model(robot_urdf)
-chain = kdl.kdl_tree.getChain(base_link, end_link)
+kdl_tree = kdl_tree_from_urdf_model(robot_urdf)
+
+
+chain = kdl_tree.getChain()
+pdb.set_trace()
 
 fk_calculator = kdl.ChainFkSolverPos_recursive(chain)
 jacobian_calculator = kdl.ChainJntToJacSolver(chain)
