@@ -48,10 +48,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && curl http://robotpkg.openrobots.org/packages/debian/robotpkg.key | apt-key add -
 
 # https://amir-yazdani.github.io/post/pykdl/
-RUN git clone -b noetic-devel https://github.com/amir-yazdani/hrl-kdl.git /kdl \
-    && cd /kdl/pykdl_utils && python3 setup.py build && sudo python3 setup.py install \
-    && cd /kdl/pykdl_utils && python3 setup.py build && sudo python3 setup.py install \
-    && cd /kdl/pykdl_utils && python3 setup.py build && sudo python3 setup.py install \
+#RUN git clone -b noetic-devel https://github.com/amir-yazdani/hrl-kdl.git /kdl \
+#    && cd /kdl/pykdl_utils && python3 setup.py build && sudo python3 setup.py install \
+#    && cd /kdl/pykdl_utils && python3 setup.py build && sudo python3 setup.py install \
+#    && cd /kdl/pykdl_utils && python3 setup.py build && sudo python3 setup.py install \
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends -o Dpkg::Options::="--force-confnew" \
