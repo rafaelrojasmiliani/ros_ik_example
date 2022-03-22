@@ -66,6 +66,7 @@ RUN apt-get update \
     && bash -c 'source /opt/ros/noetic/setup.bash && cd /aux_ws && catkin config --install --install-space /opt/ros/noetic/ --extend /opt/ros/noetic/ && catkin build' \
     && rm -rf /var/lib/apt/lists/* \
     && echo 'source /opt/ros/noetic/setup.bash' > /etc/bash.bashrc \
+    && mkdir /workspace \
     && chmod 777 /workspace \
     && echo '\
 #!/bin/bash\n\
