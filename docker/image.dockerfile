@@ -47,6 +47,11 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && echo "deb [arch=amd64] http://robotpkg.openrobots.org/packages/debian/pub $(lsb_release -cs) robotpkg" | tee /etc/apt/sources.list.d/robotpkg.list \
     && curl http://robotpkg.openrobots.org/packages/debian/robotpkg.key | apt-key add -
 
+# https://amir-yazdani.github.io/post/pykdl/
+RUN git clone -b noetic-devel https://github.com/amir-yazdani/hrl-kdl.git /kdl \
+    && cd /kdl/pykdl_utils && python3 setup.py build && sudo python3 setup.py install \
+    && cd /kdl/pykdl_utils && python3 setup.py build && sudo python3 setup.py install \
+    && cd /kdl/pykdl_utils && python3 setup.py build && sudo python3 setup.py install \
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends -o Dpkg::Options::="--force-confnew" \
@@ -61,6 +66,7 @@ RUN apt-get update \
     && bash -c 'source /opt/ros/noetic/setup.bash && cd /aux_ws && catkin config --install --install-space /opt/ros/noetic/ --extend /opt/ros/noetic/ && catkin build' \
     && rm -rf /var/lib/apt/lists/* \
     && echo 'source /opt/ros/noetic/setup.bash' > /etc/bash.bashrc \
+    && chmod 777 /workspace \
     && echo '\
 #!/bin/bash\n\
 main(){\n\
