@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: contains(steps.changed-files.outputs.modified_files, 'docker/image.dockerfile')
 
-      - name: build and push to docker vim with latex
+      - name: build and push to docker
         uses: docker/build-push-action@v2
         with:
           tags: rafa606/ros-ik-example

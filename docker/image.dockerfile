@@ -48,10 +48,13 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && curl http://robotpkg.openrobots.org/packages/debian/robotpkg.key | apt-key add -
 
 # https://amir-yazdani.github.io/post/pykdl/
+<<<<<<< HEAD
 RUN git clone -b noetic-devel https://github.com/amir-yazdani/hrl-kdl.git /kdl \
     && cd /kdl/pykdl_utils && python3 setup.py build && sudo python3 setup.py install \
     && cd /kdl/pykdl_utils && python3 setup.py build && sudo python3 setup.py install \
     && cd /kdl/pykdl_utils && python3 setup.py build && sudo python3 setup.py install
+=======
+>>>>>>> origin/master
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends -o Dpkg::Options::="--force-confnew" \
@@ -63,9 +66,11 @@ RUN apt-get update \
     && echo "export CMAKE_PREFIX_PATH=/opt/openrobots:$CMAKE_PREFIX_PATH" >> /etc/bash.bashrc \
     && mkdir -p /aux_ws/src \
     && git clone https://github.com/tork-a/rqt_joint_trajectory_plot.git /aux_ws/src/rqt_joint_trajectory_plot \
+    && git clone -b noetic-devel https://github.com/amir-yazdani/hrl-kdl.git /aux_ws/src/kdl \
     && bash -c 'source /opt/ros/noetic/setup.bash && cd /aux_ws && catkin config --install --install-space /opt/ros/noetic/ --extend /opt/ros/noetic/ && catkin build' \
     && rm -rf /var/lib/apt/lists/* \
     && echo 'source /opt/ros/noetic/setup.bash' > /etc/bash.bashrc \
+    && mkdir /workspace \
     && chmod 777 /workspace \
     && echo '\
 #!/bin/bash\n\
