@@ -37,7 +37,7 @@ main(){
     }
 
 
-    DOCKER_NETWORK_OPTIONS="--env=ROS_MASTER_URI=http://127.0.0.1:11311 --env=ROS_MASTER_IP=127.0.0.1 --env=ROS_IP=127.0.0.1"
+    DOCKER_NETWORK_OPTIONS="--env=ROS_MASTER_URI=http://127.0.0.1:11311 --env=ROS_MASTER_IP=127.0.0.1 --env=ROS_IP=127.0.0.1 --net=host"
 
     docker pull rafa606/ros-ik-example
 
