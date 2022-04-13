@@ -10,6 +10,7 @@ from geometry_msgs.msg import Pose
 from geometry_msgs.msg import Quaternion
 from functools import partial
 from copy import deepcopy
+from std_srvs.srv import Trigger, TriggerRequest
 
 
 def processFeedback(_pub: rospy.Publisher, _feedback):
@@ -17,7 +18,9 @@ def processFeedback(_pub: rospy.Publisher, _feedback):
 
 
 def button_callback(_marker: Marker):
-    print(_marker)
+    rospy.wait_for_service('solve_ik')
+    service = rospy.ServiceProxy('solve_ik', Trigger)
+    service(TriggerRequest())
 
 
 if __name__ == "__main__":
